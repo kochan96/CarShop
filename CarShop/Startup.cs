@@ -1,6 +1,8 @@
+using CarShop;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +22,8 @@ namespace ComputerShop
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CarShopDb")));
+
             services.AddControllers();
 
             // In production, the React files will be served from this directory
@@ -32,6 +36,13 @@ namespace ComputerShop
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = serviceScopeFactory.CreateScope())
+            {
+                using var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
