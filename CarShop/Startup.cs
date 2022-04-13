@@ -24,16 +24,16 @@ namespace ComputerShop
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<ApplicationDbContext>(options =>  options.UseSqlServer(Configuration.GetConnectionString("CarShopDb")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CarShopDb")));
 
             services.AddControllers();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath="/api/auth/login";
-                    options.LogoutPath="/api/auth/logout";
-                    options.AccessDeniedPath="/forbidden";
+                    options.LoginPath = "/login";
+                    options.AccessDeniedPath = "/forbidden";
+                    options.Cookie.Name = "AuthCookie";
                 });
 
             // In production, the React files will be served from this directory

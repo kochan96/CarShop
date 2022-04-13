@@ -112,7 +112,7 @@ namespace ComputerShop.Controllers
             {
                 Id = Guid.NewGuid(),
                 Brand = request.Brand,
-                CreatedOn = request.CreatedOn,
+                CreatedOn = DateTime.Now,
                 Description = request.Description,
                 FuelType = request.FuelType,
                 Mileage = request.Mileage,

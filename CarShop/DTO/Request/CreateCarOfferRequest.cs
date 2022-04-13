@@ -18,8 +18,6 @@ namespace CarShop.DTO.Request
 
         public decimal Price { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
         public FuelType FuelType { get; set; }
 
         public VehicleType VehicleType { get; set; }

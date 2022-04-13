@@ -12,12 +12,15 @@ namespace CarShop.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        [HttpGet("is-authenticated")]
+        public IActionResult IsLoggedIn()
+        {
+            return Ok(HttpContext.User.Identity.IsAuthenticated);
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromForm] string userName, [FromForm] string password)
         {
-            //TODO verify if username and password correct
-
-
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, userName),
@@ -37,6 +40,14 @@ namespace CarShop.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
+
+            return Redirect("/");
+        }
+
+        [HttpGet("logout")]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return Redirect("/");
         }
