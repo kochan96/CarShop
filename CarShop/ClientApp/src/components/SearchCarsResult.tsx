@@ -14,7 +14,7 @@ const SearchCarsResultItem = (props: VehicleListItem) => {
         >
             <Row>
                 <Col xs={12} sm={4} md className="text-sm-start text-center">
-                    <Image fluid src={`/api/image/${props.thumbnailId}`} />
+                    {/*<Image fluid src={`/api/image/${props.thumbnailId}`} />*/}
                 </Col>
                 <Col xs={12} sm={5} className="pl-4 text-sm-start text-center">
                     <div className="h2 card-title">{props.title}</div>
