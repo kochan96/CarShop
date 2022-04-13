@@ -1,0 +1,53 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+.bg-gray {
+    background-color: #ebecef;
+}
+
+.car-list-item{
+    cursor: pointer;
+}
+
+.card-title {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .card-title:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+
+.car-list-item:hover{
+      .card-title:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+}
+
+
+html, body, #root{ 
+  height:100% 
+}
+
+
+#root{ 
+  min-height: 100vh; 
+  margin: 0; 
+  
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+
+
+
+
