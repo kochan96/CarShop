@@ -10,18 +10,24 @@ export const LoginPage = () => {
           <Card>
             <Card.Img src={logolight} />
             <Card.Body>
-              <Form>
-                <Form.Group className="mb-3" controlId="formBasicLogin">
+              <Form method="post" action="api/auth/login">
+                <Form.Group className="mb-3" controlId="userName">
                   <Form.Label>Login</Form.Label>
                   <Form.Control
                     type="email"
                     required
+                    name="userName"
                     placeholder="Login lub adres email"
                   />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3" controlId="password">
                   <Form.Label>Hasło</Form.Label>
-                  <Form.Control type="password" required placeholder="Hasło" />
+                  <Form.Control
+                    name="password"
+                    type="password"
+                    required
+                    placeholder="Hasło"
+                  />
                 </Form.Group>
 
                 <Button type="submit">Zaloguj</Button>

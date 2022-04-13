@@ -2,6 +2,7 @@
 using CarShop.DataModel;
 using CarShop.DTO.Request;
 using CarShop.DTO.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -89,6 +90,7 @@ namespace ComputerShop.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create([FromForm] CreateCarOfferRequest request)
         {
             var owner = new Owner()
