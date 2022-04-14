@@ -16,7 +16,7 @@ namespace CarShop.DTO.Response
 
         public int Year { get; set; }
 
-        public decimal Price { get; set; }
+        public string Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

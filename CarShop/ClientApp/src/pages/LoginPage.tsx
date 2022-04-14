@@ -1,4 +1,4 @@
-import { Row, Form, Col, Card, Button } from "react-bootstrap";
+import { Row, Form, Col, Card, Button, Image } from "react-bootstrap";
 import { Layout } from "../layout/Layout";
 import logolight from "../logo-light.svg";
 
@@ -8,7 +8,7 @@ export const LoginPage = () => {
       <Row className="justify-content-center pt-4">
         <Col xs={12} sm={10} md={8} lg={6} xl={4}>
           <Card>
-            <Card.Img src={logolight} />
+            <Image src={logolight} className="card-img" />
             <Card.Body>
               <Form method="post" action="api/auth/login">
                 <Form.Group className="mb-3" controlId="userName">

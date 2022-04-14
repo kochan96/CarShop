@@ -5,8 +5,8 @@
         Sedan,
         Coupe,
         Kombi,
-        Kabriolet,
-        Kompakt,
+        Convertible,
+        Compact,
         MiniVan,
         Suv,
     }

@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Vehicle } from "../api";
 import { Layout } from "../layout/Layout";
+import { mapFuelType, mapVehicleType } from "../utils/enumMappings";
 
 export const CarDetailsPage = () => {
   const [index, setIndex] = useState(0);
@@ -78,8 +79,7 @@ export const CarDetailsPage = () => {
                     <div className="h3">{data.title}</div>
                     <div className="fs-5">
                       {data.brand} {data.model} &bull; {data.year} &bull;{" "}
-                      {data.mileage} &bull; {data.fuelType}
-                      &bull; {data.vehicleType}
+                      {data.mileage} &bull; {mapFuelType(data.fuelType)} &bull; {mapVehicleType(data.vehicleType)}
                     </div>
                     <div className="h2 pt-4">Cena: {data.price}</div>
                   </Col>

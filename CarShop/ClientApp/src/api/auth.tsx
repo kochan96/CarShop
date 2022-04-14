@@ -1,32 +1,31 @@
-﻿import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const AuthContext = React.createContext({
-    isAdmin: false,
-    setIsAdmin: (value: boolean) => { },
+  isAdmin: false,
 });
 
 type Props = {
-    children?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export const AuthContextProvider: React.FC<Props> = (props) => {
-    const [isAdmin, setIsAdmin] = useState(false);
-    useEffect(() => {
-        const checkAdmin = async () => {
-            const response = await fetch("api/auth/is-authenticated");
-            const jsonData = (await response.json()) as boolean;
-            console.log(jsonData);
-            setIsAdmin(jsonData);
-        };
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    const checkAdmin = async () => {
+      const response = await fetch("api/auth/is-authenticated");
+      const jsonData = (await response.json()) as boolean;
+      console.log(jsonData);
+      setIsAdmin(jsonData);
+    };
 
-        checkAdmin();
-    }, []);
+    checkAdmin();
+  }, []);
 
-    return (
-        <AuthContext.Provider value={{ isAdmin: isAdmin, setIsAdmin: setIsAdmin }}>
-            {props.children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ isAdmin: isAdmin }}>
+      {props.children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useIsAdmin = () => useContext(AuthContext);
