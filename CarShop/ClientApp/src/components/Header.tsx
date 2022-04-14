@@ -19,11 +19,11 @@ export const Header = () => {
                 Ogłoszenia
               </Nav.Link>
               <Nav.Link as={Link} to="/about">
-                About
+                O aplikacji
               </Nav.Link>
               {isAdmin && (
                 <Nav.Link as={Link} to="/new-vehicle">
-                  Add New
+                  Dodaj ofertę
                 </Nav.Link>
               )}
             </Nav>
