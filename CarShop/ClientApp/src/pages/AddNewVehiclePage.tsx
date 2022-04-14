@@ -1,5 +1,5 @@
-import { useState } from "React";
-import { Form, Row, Col, Card, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Form, Row, Col, Card, Button, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { FuelType, VehicleType } from "../api";
 import { Layout } from "../layout/Layout";
@@ -251,7 +251,6 @@ export const AddNewVehiclePage = () => {
                   <Form.Control
                     type="text"
                     disabled={isLoading}
-                    disabled={isLoading}
                     placeholder="Przebieg"
                     {...register("mileage", {
                       required: requiredErrorText,
@@ -360,7 +359,7 @@ export const AddNewVehiclePage = () => {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                <Button type="submit" variant="primary">
+                <Button type="submit" disabled={isLoading} variant="primary">
                   {isLoading && (
                     <Spinner
                       as="span"

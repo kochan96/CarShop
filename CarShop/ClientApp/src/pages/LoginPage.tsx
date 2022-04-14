@@ -70,7 +70,7 @@ export const LoginPage = () => {
                   />
                 </Form.Group>
 
-                <Button type="submit">{isLoading && (
+                <Button disabled={isLoading} type="submit">{isLoading && (
                   <Spinner
                     as="span"
                     animation="border"

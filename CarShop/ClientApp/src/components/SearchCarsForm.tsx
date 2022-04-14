@@ -116,7 +116,7 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
           </Row>
           <Row>
             <Col>
-              <Button variant="primary" type="submit">
+              <Button disabled={isLoading} variant="primary" type="submit">
                 {isLoading && (
                   <Spinner
                     as="span"
