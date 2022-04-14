@@ -83,7 +83,8 @@ namespace ComputerShop.Controllers
                 Title = x.Title,
                 VehicleType = x.VehicleType.ToString(),
                 Year = x.Year
-            }).Skip(PageSize * (query.Page - 1))
+            }).OrderByDescending(x => x.CreatedOn)
+            .Skip(PageSize * (query.Page - 1))
             .Take(PageSize + 1)
             .ToList();
 
