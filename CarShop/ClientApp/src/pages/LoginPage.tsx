@@ -1,4 +1,5 @@
-import { Row, Form, Col, Card, Button, Image } from "react-bootstrap";
+import { useState } from "react";
+import { Row, Form, Col, Card, Button, Image, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Layout } from "../layout/Layout";
 import logolight from "../logo-light.svg";
@@ -10,6 +11,7 @@ type LoginFormData = {
 
 export const LoginPage = () => {
   const { register, handleSubmit } = useForm<LoginFormData>();
+    const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: any) => {
     try {
@@ -23,8 +25,10 @@ export const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       };
-
+      
+        setIsLoading(true);
       const response = await fetch("/api/auth/login", requestOptions);
+
       if (response.ok) {
         window.location.href ="/"
       } else {
@@ -34,6 +38,7 @@ export const LoginPage = () => {
       console.log(err);
       alert("Nieznany błąd");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -49,6 +54,7 @@ export const LoginPage = () => {
                   <Form.Control
                     type="text"
                     required
+                                      disabled={isLoading}
                     placeholder="Nazwa użytkownika"
                     {...register("userName")}
                   />
@@ -58,12 +64,21 @@ export const LoginPage = () => {
                   <Form.Control
                     type="password"
                     required
+                                      disabled={isLoading}
                     placeholder="Hasło"
                     {...register("password")}
                   />
                 </Form.Group>
 
-                <Button type="submit">Zaloguj</Button>
+                <Button type="submit">{isLoading && (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                )}Zaloguj</Button>
               </Form>
             </Card.Body>
           </Card>

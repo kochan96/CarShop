@@ -36,6 +36,7 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
               <Form.Label>Marka</Form.Label>
               <Form.Control
                 type="text"
+                              disabled={isLoading}
                 placeholder="Marka pojazdu"
                 {...register("brand")}
               />
@@ -45,6 +46,7 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
               <Form.Label>Model</Form.Label>
               <Form.Control
                 type="text"
+                              disabled={isLoading}
                 placeholder="Model"
                 {...register("model")}
               />
@@ -53,7 +55,8 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
             <Form.Group as={Col} xs={12} sm={3} controlId="MinPrice">
               <Form.Label>Cena od</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
+                              disabled={isLoading}
                 placeholder="Cena od"
                 {...register("minPrice")}
               />
@@ -63,7 +66,8 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
               <Form.Label>Cena do</Form.Label>
 
               <Form.Control
-                type="text"
+                type="number"
+                              disabled={isLoading}
                 placeholder="Cena do"
                 {...register("maxPrice")}
               />
@@ -73,7 +77,8 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
             <Form.Group as={Col} xs={12} sm={3} controlId="MinYear">
               <Form.Label>Rok produkcji od</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
+                              disabled={isLoading}
                 placeholder="Rok produkcji od"
                 {...register("minYear")}
               />
@@ -82,7 +87,8 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
             <Form.Group as={Col} xs={12} sm={3} controlId="MaxYear">
               <Form.Label>Rok produkcji do</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
+                              disabled={isLoading}
                 placeholder="Rok produkcji do"
                 {...register("maxYear")}
               />
@@ -91,7 +97,8 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
             <Form.Group as={Col} xs={12} sm={3} controlId="MinMileage">
               <Form.Label>Przebieg od</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
+                              disabled={isLoading}
                 placeholder="Przebieg od"
                 {...register("minMileage")}
               />
@@ -100,8 +107,9 @@ export const SearchCarsForm = (props: SearchCaseFormProps) => {
             <Form.Group as={Col} xs={12} sm={3} controlId="MaxMileage">
               <Form.Label>Przebieg do</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Przebieg do"
+                              disabled={isLoading}
                 {...register("maxMileage")}
               />
             </Form.Group>
