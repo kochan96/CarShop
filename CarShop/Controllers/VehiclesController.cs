@@ -75,13 +75,13 @@ namespace ComputerShop.Controllers
                 Id = x.Id,
                 Brand = x.Brand,
                 CreatedOn = x.CreatedOn,
-                FuelType = x.FuelType,
+                FuelType = x.FuelType.ToString(),
                 Mileage = x.Mileage,
                 Model = x.Model,
                 Price = $"{x.Price} PLN",
                 ThumbnailId = x.Images.First(x => x.IsThumbnail).Id,
                 Title = x.Title,
-                VehicleType = x.VehicleType,
+                VehicleType = x.VehicleType.ToString(),
                 Year = x.Year
             }).Skip(PageSize * (query.Page - 1))
             .Take(PageSize + 1)
@@ -114,13 +114,13 @@ namespace ComputerShop.Controllers
                 Brand = vehicle.Brand,
                 CreatedOn = vehicle.CreatedOn,
                 Description = vehicle.Description,
-                FuelType = vehicle.FuelType,
+                FuelType = vehicle.FuelType.ToString(),
                 Id = vehicle.Id,
                 Mileage = vehicle.Mileage,
                 Model = vehicle.Model,
                 Price = $"{vehicle.Price} PLN",
                 Title = vehicle.Title,
-                VehicleType = vehicle.VehicleType,
+                VehicleType = vehicle.VehicleType.ToString(),
                 Year = vehicle.Year,
                 ImageIds = vehicle.Images.Select(x => x.Id).ToList()
             };

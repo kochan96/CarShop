@@ -23,7 +23,7 @@ export const HomePage = () => {
         var queryString = Object.entries(data)
           .filter((entry) => !!entry[1])
           .map((entry) => "&" + entry[0] + "=" + entry[1])
-          .join();
+          .join("");
         setIsLoading(true);
         const response = await fetch(
           `/api/vehicles/list?page=${pageIndex}${queryString}`

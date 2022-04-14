@@ -9,6 +9,8 @@ namespace CarShop
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImage> VehicleImages { get; set; }
 
+        public DbSet<Admin> Admins { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

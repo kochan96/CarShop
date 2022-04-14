@@ -1,18 +1,18 @@
 export enum FuelType {
-  Petrol,
-  Diesel,
-  LPG,
-  Electric,
+  "Petrol" = "Petrol",
+  "Diesel" = "Diesel",
+  "LPG" = "LPG",
+  "Electric" = "Electric",
 }
 
 export enum VehicleType {
-  Sedan,
-  Coupe,
-  Combi,
-  Convertible,
-  Compact,
-  MiniVan,
-  Suv,
+  "Sedan" = "Sedan",
+  "Coupe" = "Coupe",
+  "Combi" = "Combi",
+  "Convertible" = "Convertible",
+  "Compact" = "Compact",
+  "MiniVan" = "MiniVan",
+  "Suv" = "Suv",
 }
 
 export type Vehicle = {
@@ -42,8 +42,7 @@ export type VehicleListItem = {
   createdOn: Date;
 };
 
-
 export type VehicleListResponse = {
-    items: VehicleListItem[];
-    lastPage:boolean;
-}
+  items: VehicleListItem[];
+  lastPage: boolean;
+};

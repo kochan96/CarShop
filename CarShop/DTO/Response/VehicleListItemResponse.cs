@@ -19,9 +19,9 @@ namespace CarShop.DTO.Response
 
         public DateTime CreatedOn { get; set; }
 
-        public FuelType FuelType { get; set; }
+        public string FuelType { get; set; }
 
-        public VehicleType VehicleType { get; set; }
+        public string VehicleType { get; set; }
 
         //TODO maybe change to separate table
         public string Brand { get; set; }

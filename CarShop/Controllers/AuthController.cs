@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using CarShop.DTO.Request;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using PasswordHashing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -12,6 +15,12 @@ namespace CarShop.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+        public AuthController(ApplicationDbContext dbContext)
+        {
+            _context = dbContext;
+        }
+
         [HttpGet("is-authenticated")]
         public IActionResult IsLoggedIn()
         {
@@ -19,11 +28,21 @@ namespace CarShop.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromForm] string userName, [FromForm] string password)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
+            //TODO validate login and password
+
+            var user = _context.Admins.FirstOrDefault(x => x.UserName == request.UserName);
+            if (user == null) return BadRequest();
+
+            if (!PasswordHasher.Validate(request.Password, user.Password))
+            {
+                return BadRequest();
+            }
+
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.Name, request.UserName),
                 new Claim(ClaimTypes.Role, "Administrator")};
 
             var claimsIdentity = new ClaimsIdentity(
