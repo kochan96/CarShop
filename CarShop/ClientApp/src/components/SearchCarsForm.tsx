@@ -1,55 +1,123 @@
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
-export const SearchCarsForm = () => {
+export type SearchCarsFormData = {
+  brand: string;
+  model: string;
+  minPrice: string;
+  maxPrice: string;
+  minYear: string;
+  maxYear: string;
+  minMileage: string;
+  maxMileage: string;
+};
+
+export type SearchCaseFormProps = {
+  onSubmit: (data: SearchCarsFormData) => Promise<void>;
+};
+
+export const SearchCarsForm = (props: SearchCaseFormProps) => {
+  const { register, handleSubmit } = useForm<SearchCarsFormData>();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async (data: SearchCarsFormData) => {
+    setIsLoading(true);
+    await props.onSubmit(data);
+    setIsLoading(false);
+  };
+
   return (
     <Row>
       <Col>
-        <Form className="pb-2">
+        <Form className="pb-2" onSubmit={handleSubmit(onSubmit)}>
           <Row className="mb-3">
-            <Form.Group as={Col} xs={12} sm={3} controlId="Marka">
+            <Form.Group as={Col} xs={12} sm={3} controlId="brand">
               <Form.Label>Marka</Form.Label>
-              <Form.Control name="Marka" type="text" placeholder="Marka pojazdu" />
+              <Form.Control
+                type="text"
+                placeholder="Marka pojazdu"
+                {...register("brand")}
+              />
             </Form.Group>
 
-            <Form.Group as={Col} xs={12} sm={3}  controlId="Model">
+            <Form.Group as={Col} xs={12} sm={3} controlId="model">
               <Form.Label>Model</Form.Label>
-              <Form.Control name="Model" type="text" placeholder="Model" />
+              <Form.Control
+                type="text"
+                placeholder="Model"
+                {...register("model")}
+              />
             </Form.Group>
 
-            <Form.Group as={Col} xs={12} sm={3}  controlId="MinPrice">
+            <Form.Group as={Col} xs={12} sm={3} controlId="MinPrice">
               <Form.Label>Cena od</Form.Label>
-              <Form.Control name="MinPrice" type="text" placeholder="Cena od" />
+              <Form.Control
+                type="text"
+                placeholder="Cena od"
+                {...register("minPrice")}
+              />
             </Form.Group>
 
-            <Form.Group as={Col} xs={12} sm={3}  controlId="MaxPrice">
+            <Form.Group as={Col} xs={12} sm={3} controlId="MaxPrice">
               <Form.Label>Cena do</Form.Label>
-              <Form.Control name="MaxPrice" type="text" placeholder="Cena do" />
+
+              <Form.Control
+                type="text"
+                placeholder="Cena do"
+                {...register("maxPrice")}
+              />
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} xs={12} sm={3}  controlId="MinYear">
+            <Form.Group as={Col} xs={12} sm={3} controlId="MinYear">
               <Form.Label>Rok produkcji od</Form.Label>
-              <Form.Control name="MinYear" type="text" placeholder="Rok produkcji od" />
+              <Form.Control
+                type="text"
+                placeholder="Rok produkcji od"
+                {...register("minYear")}
+              />
             </Form.Group>
 
-            <Form.Group as={Col} xs={12} sm={3}  controlId="MaxYear">
+            <Form.Group as={Col} xs={12} sm={3} controlId="MaxYear">
               <Form.Label>Rok produkcji do</Form.Label>
-              <Form.Control name="MaxYear" type="text" placeholder="Rok produkcji do" />
+              <Form.Control
+                type="text"
+                placeholder="Rok produkcji do"
+                {...register("maxYear")}
+              />
             </Form.Group>
 
-            <Form.Group as={Col} xs={12} sm={3}  controlId="MinMileage">
+            <Form.Group as={Col} xs={12} sm={3} controlId="MinMileage">
               <Form.Label>Przebieg od</Form.Label>
-              <Form.Control name="MinMileage" type="text" placeholder="Przebieg od" />
+              <Form.Control
+                type="text"
+                placeholder="Przebieg od"
+                {...register("minMileage")}
+              />
             </Form.Group>
 
-            <Form.Group as={Col} xs={12} sm={3}  controlId="MaxMileage">
+            <Form.Group as={Col} xs={12} sm={3} controlId="MaxMileage">
               <Form.Label>Przebieg do</Form.Label>
-              <Form.Control name="MaxMileage" type="text" placeholder="Przebieg do" />
+              <Form.Control
+                type="text"
+                placeholder="Przebieg do"
+                {...register("maxMileage")}
+              />
             </Form.Group>
           </Row>
           <Row>
             <Col>
               <Button variant="primary" type="submit">
+                {isLoading && (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                )}
                 Szukaj
               </Button>
             </Col>

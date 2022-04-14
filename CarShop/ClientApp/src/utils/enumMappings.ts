@@ -1,4 +1,4 @@
-﻿import { FuelType, VehicleType } from "../api";
+import { FuelType, VehicleType } from "../api";
 
 export const mapFuelType = (fuelType: FuelType): string => {
   switch (fuelType) {

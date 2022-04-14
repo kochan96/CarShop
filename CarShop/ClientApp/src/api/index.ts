@@ -41,3 +41,9 @@ export type VehicleListItem = {
   brand: string;
   createdOn: Date;
 };
+
+
+export type VehicleListResponse = {
+    items: VehicleListItem[];
+    lastPage:boolean;
+}

@@ -22,11 +22,55 @@ namespace ComputerShop.Controllers
             _dbContext = dbContext;
         }
 
+        private const int PageSize = 4;
+
         [HttpGet]
         [Route("list")]
-        public IActionResult GetList()
+        public IActionResult GetList([FromQuery] GetListOfVehiclesRequest query)
         {
-            var vehicles = _dbContext.Vehicles.Include(x => x.Images).Select(x => new VehicleListItemResponse()
+
+            var queryable = _dbContext.Vehicles.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(query.Brand))
+            {
+                queryable = queryable.Where(x => x.Brand.Contains(query.Brand));
+            }
+
+            if (!string.IsNullOrWhiteSpace(query.Model))
+            {
+                queryable = queryable.Where(x => x.Model.Contains(query.Model));
+            }
+
+            if (query.MinPrice.HasValue)
+            {
+                queryable = queryable.Where(x => x.Price >= query.MinPrice);
+            }
+
+            if (query.MaxPrice.HasValue)
+            {
+                queryable = queryable.Where(x => x.Price <= query.MaxPrice);
+            }
+
+            if (query.MinYear.HasValue)
+            {
+                queryable = queryable.Where(x => x.Year >= query.MinYear);
+            }
+
+            if (query.MaxYear.HasValue)
+            {
+                queryable = queryable.Where(x => x.Year <= query.MaxYear);
+            }
+
+            if (query.MinMileage.HasValue)
+            {
+                queryable = queryable.Where(x => x.Year >= query.MinMileage);
+            }
+
+            if (query.MaxMileage.HasValue)
+            {
+                queryable = queryable.Where(x => x.Year <= query.MaxMileage);
+            }
+
+            var vehicles = queryable.Include(x => x.Images).Select(x => new VehicleListItemResponse()
             {
                 Id = x.Id,
                 Brand = x.Brand,
@@ -39,9 +83,17 @@ namespace ComputerShop.Controllers
                 Title = x.Title,
                 VehicleType = x.VehicleType,
                 Year = x.Year
-            }).ToList();
+            }).Skip(PageSize * (query.Page - 1))
+            .Take(PageSize + 1)
+            .ToList();
 
-            return Ok(vehicles);
+            var response = new VehicleListResponse()
+            {
+                Items = vehicles.Take(PageSize).ToList(),
+                LastPage = vehicles.Count <= PageSize
+            };
+
+            return Ok(response);
         }
 
         [HttpGet("{id}")]

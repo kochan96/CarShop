@@ -21,7 +21,8 @@ const SearchCarsResultItem = (props: VehicleListItem) => {
           <div className="h2 card-title">{props.title}</div>
           <div className="fs-4">
             {props.brand} {props.model} &bull; {props.year} &bull;{" "}
-            {props.mileage} &bull; {mapFuelType(props.fuelType)} &bull; {mapVehicleType(props.vehicleType)}
+            {props.mileage} &bull; {mapFuelType(props.fuelType)} &bull;{" "}
+            {mapVehicleType(props.vehicleType)}
           </div>
         </Col>
         <Col xs={12} sm={3} md className="text-sm-end text-center">
@@ -36,10 +37,19 @@ const SearchCarsResultItem = (props: VehicleListItem) => {
 };
 
 export type SearchCarsResultProps = {
+  isLoading: boolean;
   items: VehicleListItem[];
+  previousDisabled: boolean;
+  nextPageDisabled: boolean;
+  onPreviousPage: () => void;
+  onNextPage: () => void;
 };
 
 export const SearchCarsResult = (props: SearchCarsResultProps) => {
+  if (props.isLoading) {
+    return <div className="h4">Loading ...</div>;
+  }
+
   if (!props.items || !props.items.length) {
     return <div className="h4">No data</div>;
   }
@@ -54,8 +64,18 @@ export const SearchCarsResult = (props: SearchCarsResultProps) => {
       <Row className="justify-content-end">
         <Col xs="auto">
           <Pagination>
-            <Pagination.Prev>{"< Poprzednia strona"}</Pagination.Prev>
-            <Pagination.Next>{"Następna strona >"}</Pagination.Next>
+            <Pagination.Prev
+              disabled={props.previousDisabled}
+              onClick={props.onPreviousPage}
+            >
+              {"< Poprzednia strona"}
+            </Pagination.Prev>
+            <Pagination.Next
+              disabled={props.nextPageDisabled}
+              onClick={props.onNextPage}
+            >
+              {"Następna strona >"}
+            </Pagination.Next>
           </Pagination>
         </Col>
       </Row>
